@@ -32,6 +32,42 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
 //Routes
+//Scrape article's titles and links
+app.get("/scrape", function(req, res){
+    request("https://old.reddit.com/r/news/", function(error, response, html){
+        let $ = cheerio.load(html);
+        
+        $("p.title").each(function(i = 0, element){
+            //Grab 20 articles
+            if (i < 20){
+                let title = $(element).text();
+                let link = $(element).children().attr("href");
+    
+                let article = {
+                    title: title,
+                    link: `${link}`
+                };
+
+                db.Article.create(article)
+                .then(function(response){
+                })
+                .catch(function(err){
+                    console.log(err);
+                });
+
+                i++;
+            }
+        });
+    });
+    res.send("Scrape Complete");
+});
+
+//Get articles from db and populate index page
+app.get("/", function(req, res){
+    db.Article.find({}, function(err, results){
+        console.log(results);
+    });
+});
 
 // Make connection.
 app.listen(PORT, function () {
