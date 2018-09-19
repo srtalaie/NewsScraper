@@ -66,6 +66,7 @@ app.get("/scrape", function(req, res){
 app.get("/", function(req, res){
     db.Article.find({}, function(err, results){
         console.log(results);
+        res.render('index', results);
     });
 });
 
