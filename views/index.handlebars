@@ -1,11 +1,9 @@
-<div class="row">
-    <div class="col s12">
-        <ul>
-            {{#each this}}
-            <li>
+{{#each this}}
+    <li>
+        <div class="card teal lighten-2">
+            <div class="card-content">
                 <a href="{{this.link}}">{{this.title}}</a>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-</div>
+            </div>    
+        </div>
+    </li>
+{{/each}}
