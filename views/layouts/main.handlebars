@@ -58,13 +58,28 @@
         let comment = $("#comment").val();
         let newComment = {
             author: author,
-            comment: comment
+            body: comment
         };
         $.ajax({
             url: `/addComment/${id}`,
             method: 'POST',
             data: newComment
         }).then(function(response){});
+    });
+
+    $(document).on('click', "#view-comment", function(){
+        let id = $(this).attr("data-id");
+        $.ajax({
+            url: `/getComment/${id}`,
+            method: 'GET',
+        }).then(function(response){
+            if (response.comment){
+                $("#modal-author").html(`<p>Author:${response.comment.author}</p>`);
+                $("#modal-comment").html(`<p>Comment:${response.comment.body}</p>`);
+            } else {
+                $("#view-comment-modal-if-no-content").html(`<p>No Comments Made Yet</p>`);
+            }
+        });
     });
 
     //initialize all modals           

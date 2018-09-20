@@ -6,16 +6,30 @@
             <div class="row center-align">
                 <a class="waves-effect waves-light btn" id="save-button">Save</a>
                 <a class="waves-effect waves-light btn modal-trigger" href="#comment-modal">Add a Comment</a>
+                <a class="waves-effect waves-light btn modal-trigger" href="#view-comment-modal" id="view-comment" data-id={{this._id}}>View Comment</a>
             </div>
         </div>
     </div>
     <div id="comment-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" id="comment-content">
             <input type="text" id="author" placeholder="Name">
             <textarea id="comment" placeholder="Your Comment"></textarea>
         </div>
         <div class="modal-footer">
             <a href="/" class="modal-close waves-effect waves-green btn-flat" id="save-comment" data-id={{this._id}}>Save Comment</a>
+        </div>
+    </div>
+    <div id="view-comment-modal" class="modal">
+        <div class="modal-content" id="view-comment-modal-if-no-content">
+            <div class="row">
+                <div id="modal-author"></div>
+            </div>
+            <div class="row">
+                <div id="modal-comment"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="/" class="modal-close waves-effect waves-green btn-flat" data-id={{this._id}}>Close</a>
         </div>
     </div>
 </li>

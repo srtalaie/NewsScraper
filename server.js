@@ -91,12 +91,24 @@ app.post("/addComment/:id", function(req, res){
         body: req.body.body
     };
     db.Comment.create(newComment).then(function(comment){
-        return db.Article.findByIdAndUpdate({ _id: req.params.id }, { comment: comment._id });
+        return db.Article.findByIdAndUpdate({ _id: req.params.id }, { comment: comment._id }, { new: true });
     }).then(function(response){
         res.json(response);
     }).catch(function(err) {
         res.json(err);
     });
+});
+
+//Get Comment
+app.get("/getComment/:id", function(req, res){
+    db.Article.findById({ _id: req.params.id })
+    .populate("comment")
+    .then(function(article) {
+        res.json(article);
+      })
+    .catch(function(err) {
+        res.json(err);
+      });
 });
 
 //HTML Routes
