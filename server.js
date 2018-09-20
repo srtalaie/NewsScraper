@@ -4,6 +4,7 @@ let bodyParser = require("body-parser");
 let mongoose = require("mongoose");
 let cheerio = require("cheerio");
 let request = require("request");
+let path = require("path");
 
 const PORT = process.env.PORT || 8080;
 
@@ -54,20 +55,53 @@ app.get("/scrape", function(req, res){
                 .catch(function(err){
                     console.log(err);
                 });
-
                 i++;
             }
         });
     });
-    res.send("Scrape Complete");
 });
 
 //Get articles from db and populate index page
 app.get("/", function(req, res){
     db.Article.find({}, function(err, results){
-        console.log(results);
         res.render('index', results);
     });
+});
+
+//Target article by id and set articles saved property to true
+app.post("/saved/:id", function(req, res){
+    db.Article.findByIdAndUpdate({ _id: req.params.id }, { $set: { saved: true }}, function(err, response){
+        if (err) throw err;
+    });
+});
+
+//Get only the saved articles
+app.get("/saved", function(req, res){
+    db.Article.find({saved: true}, function(err, results){
+        res.render('index', results);
+    });
+});
+
+//Post Note on Article
+app.post("/addComment/:id", function(req, res){
+    console.log(req.body.author);
+    console.log(req.body.body);
+    let newComment = {
+        author: req.body.author,
+        body: req.body.body
+    };
+    db.Comment.create(newComment).then(function(comment){
+        return db.Article.findByIdAndUpdate({ _id: req.params.id }, { comment: comment._id });
+    }).then(function(response){
+        res.json(response);
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
+//HTML Routes
+app.get("/app", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/js/app.js"));
 });
 
 // Make connection.

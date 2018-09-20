@@ -1,9 +1,22 @@
 {{#each this}}
-    <li>
-        <div class="card teal lighten-2">
-            <div class="card-content">
-                <a href="{{this.link}}">{{this.title}}</a>
-            </div>    
+<li style="color: whitesmoke">
+    <div class="card teal lighten-2">
+        <div class="card-content" data-id={{this._id}}>
+            <a href="{{this.link}}">{{this.title}}</a>
+            <div class="row center-align">
+                <a class="waves-effect waves-light btn" id="save-button">Save</a>
+                <a class="waves-effect waves-light btn modal-trigger" id="note-button" href="#comment-modal">Add a Note</a>
+            </div>
         </div>
-    </li>
+    </div>
+    <div id="comment-modal" class="modal">
+        <div class="modal-content">
+            <input type="text" id="author" placeholder="Name">
+            <textarea id="comment" placeholder="Your Comment"></textarea>
+        </div>
+        <div class="modal-footer">
+            <a href="/" class="modal-close waves-effect waves-green btn-flat" id="save-note" data-id={{this._id}}>Save Note</a>
+        </div>
+    </div>
+</li>
 {{/each}}

@@ -4,14 +4,14 @@ let Schema =  mongoose.Schema;
 
 //Create comment schema
 let CommentSchema = new Schema({
-    Author: {
+    author: {
         type: String,
         required: true
     },
-    Body: {
+    body: {
         type: String,
         required: true
-      }
+    }
 });
 
 let Comment = mongoose.model("Comment", CommentSchema);
