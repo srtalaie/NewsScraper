@@ -111,11 +111,6 @@ app.get("/getComment/:id", function(req, res){
       });
 });
 
-//HTML Routes
-app.get("/app", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/js/app.js"));
-});
-
 // Make connection.
 app.listen(PORT, function () {
     // Log (server-side) when our server has started
