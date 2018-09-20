@@ -1,11 +1,11 @@
 {{#each this}}
-<li style="color: whitesmoke">
+<li>
     <div class="card teal lighten-2">
         <div class="card-content" data-id={{this._id}}>
             <a href="{{this.link}}">{{this.title}}</a>
             <div class="row center-align">
                 <a class="waves-effect waves-light btn" id="save-button">Save</a>
-                <a class="waves-effect waves-light btn modal-trigger" id="note-button" href="#comment-modal">Add a Note</a>
+                <a class="waves-effect waves-light btn modal-trigger" href="#comment-modal">Add a Comment</a>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
             <textarea id="comment" placeholder="Your Comment"></textarea>
         </div>
         <div class="modal-footer">
-            <a href="/" class="modal-close waves-effect waves-green btn-flat" id="save-note" data-id={{this._id}}>Save Note</a>
+            <a href="/" class="modal-close waves-effect waves-green btn-flat" id="save-comment" data-id={{this._id}}>Save Comment</a>
         </div>
     </div>
 </li>

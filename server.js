@@ -13,6 +13,8 @@ let app = express();
 
 // Use body-parser for handling form submissions
 app.use(bodyParser.urlencoded({ extended: true }));
+// parse application/json
+app.use(bodyParser.json());
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
@@ -30,7 +32,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 //Routes
 //Scrape article's titles and links
@@ -70,7 +72,7 @@ app.get("/", function(req, res){
 
 //Target article by id and set articles saved property to true
 app.post("/saved/:id", function(req, res){
-    db.Article.findByIdAndUpdate({ _id: req.params.id }, { $set: { saved: true }}, function(err, response){
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { $set: { saved: true }}, function(err, response){
         if (err) throw err;
     });
 });
@@ -84,8 +86,6 @@ app.get("/saved", function(req, res){
 
 //Post Note on Article
 app.post("/addComment/:id", function(req, res){
-    console.log(req.body.author);
-    console.log(req.body.body);
     let newComment = {
         author: req.body.author,
         body: req.body.body

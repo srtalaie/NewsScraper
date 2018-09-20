@@ -51,17 +51,19 @@
         });
     });
     
-    $(document).on('click', "#save-note", function(){
+    $(document).on('click', "#save-comment", function(){
         let id = $(this).attr("data-id");
+        console.log(id);
         let author = $("#author").val();
         let comment = $("#comment").val();
+        let newComment = {
+            author: author,
+            comment: comment
+        };
         $.ajax({
             url: `/addComment/${id}`,
-            method: 'POST'
-            data: {
-                author: author,
-                body: comment
-            }
+            method: 'POST',
+            data: newComment
         }).then(function(response){});
     });
 
