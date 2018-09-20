@@ -74,8 +74,8 @@
             method: 'GET',
         }).then(function(response){
             if (response.comment){
-                $("#modal-author").html(`<p>Author:${response.comment.author}</p>`);
-                $("#modal-comment").html(`<p>Comment:${response.comment.body}</p>`);
+                $("#modal-author").html(`<p>Author: ${response.comment.author}</p>`);
+                $("#modal-comment").html(`<p>Comment: ${response.comment.body}</p>`);
             } else {
                 $("#view-comment-modal-if-no-content").html(`<p>No Comments Made Yet</p>`);
             }
