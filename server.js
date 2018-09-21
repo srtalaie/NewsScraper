@@ -67,7 +67,6 @@ app.get("/scrape", function(req, res){
 //Get articles from db and populate index page
 app.get("/", function(req, res){
     db.Article.find({}, function(err, results){
-        console.log(results)
         let data = {
             articles: results
         };
@@ -85,7 +84,10 @@ app.post("/saved/:id", function(req, res){
 //Get only the saved articles
 app.get("/saved", function(req, res){
     db.Article.find({saved: true}, function(err, results){
-        res.render('index', results);
+        let data = {
+            articles: results
+        };
+        res.render('index', data);
     });
 });
 
