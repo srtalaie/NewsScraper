@@ -82,8 +82,12 @@
             method: 'GET',
         }).then(function(response){
             if (response.comment){
-                $("#modal-author").html(`<p>Author: ${response.comment.author}</p>`);
-                $("#modal-comment").html(`<p>Comment: ${response.comment.body}</p>`);
+                response.comment.forEach(function(comments){
+                    $("#view-comment-modal-content").append(`
+                    <p>Author: ${comments.author}</p>
+                    <p>Comment: ${comments.body}</p>
+                    -----------------------------------------------------`);
+                });
             } else {
                 $("#view-comment-modal-if-no-content").html(`<p>No Comments Made Yet</p>`);
             }

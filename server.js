@@ -91,7 +91,7 @@ app.post("/addComment/:id", function(req, res){
         body: req.body.body
     };
     db.Comment.create(newComment).then(function(comment){
-        return db.Article.findByIdAndUpdate({ _id: req.params.id }, { comment: comment._id }, { new: true });
+        return db.Article.findByIdAndUpdate({ _id: req.params.id }, { $push: { comment: comment._id } }, { new: true });
     }).then(function(response){
         res.json(response);
     }).catch(function(err) {
