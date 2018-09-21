@@ -1,8 +1,8 @@
-{{#each this}}
+{{#each this.articles}}
 <li>
     <div class="card teal lighten-2">
         <div class="card-content" data-id={{this._id}}>
-            <a href="{{this.link}}" style="color: whitesmoke;">{{this.title}}</a>
+            <a href="{{this.link}}" style="color: rgba(245, 245, 245, 0.61);">{{this.title}}</a>
             <div class="row center-align" style="padding-top: 5px;">
                 <a class="waves-effect waves-light btn" id="save-button">Save</a>
                 <a class="waves-effect waves-light btn modal-trigger" href="#comment-modal">Add a Comment</a>

@@ -60,13 +60,18 @@ app.get("/scrape", function(req, res){
                 i++;
             }
         });
+        res.redirect('/');
     });
 });
 
 //Get articles from db and populate index page
 app.get("/", function(req, res){
     db.Article.find({}, function(err, results){
-        res.render('index', results);
+        console.log(results)
+        let data = {
+            articles: results
+        };
+        res.render('index', data);
     });
 });
 
