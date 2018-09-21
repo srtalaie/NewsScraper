@@ -84,13 +84,26 @@
             if (response.comment){
                 response.comment.forEach(function(comments){
                     $("#view-comment-modal-content").append(`
+                    <div>
                     <p>Author: ${comments.author}</p>
                     <p>Comment: ${comments.body}</p>
-                    -----------------------------------------------------`);
+                    -----------------------------------------------------
+                    <button data-id=${comments._id} id="delete-comment">Delete Comment</button>
+                    </div>`);
                 });
             } else {
                 $("#view-comment-modal-if-no-content").html(`<p>No Comments Made Yet</p>`);
             }
+        });
+    });
+
+    $(document).on("click", "#delete-comment", function(){
+        let id = $(this).attr("data-id");
+        $.ajax({
+            url: `/deleteComment/${id}`,
+            method: "GET"
+        }).then(function(response){
+            location.reload();
         });
     });
 

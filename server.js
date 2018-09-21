@@ -111,6 +111,15 @@ app.get("/getComment/:id", function(req, res){
       });
 });
 
+//Delete a Comment
+app.get("/deleteComment/:id", function(req, res){
+    db.Comment.find({ _id: req.params.id }).remove(function(err, results){
+        if (err) throw err;
+
+        res.json(results);
+    });
+});
+
 // Make connection.
 app.listen(PORT, function () {
     // Log (server-side) when our server has started
