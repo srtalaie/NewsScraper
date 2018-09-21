@@ -72,16 +72,20 @@
             url: `/addComment/${id}`,
             method: 'POST',
             data: newComment
-        }).then(function(response){});
+        }).then(function(response){
+            $("#author").val("");
+            $("#comment").val("");
+        });
     });
 
     $(document).on('click', "#view-comment", function(){
         let id = $(this).attr("data-id");
+        $("#view-comment-modal-content").empty();
         $.ajax({
             url: `/getComment/${id}`,
             method: 'GET',
         }).then(function(response){
-            if (response.comment){
+            if (response.comment.length > 0){
                 response.comment.forEach(function(comments){
                     $("#view-comment-modal-content").append(`
                     <div>
@@ -92,7 +96,7 @@
                     </div>`);
                 });
             } else {
-                $("#view-comment-modal-if-no-content").html(`<p>No Comments Made Yet</p>`);
+                $("#view-comment-modal-content").html(`<p>No Comments Made Yet</p>`);
             }
         });
     });

@@ -108,7 +108,7 @@ app.post("/addComment/:id", function(req, res){
 
 //Get Comment
 app.get("/getComment/:id", function(req, res){
-    db.Article.findById({ _id: req.params.id })
+    db.Article.findOne({ _id: req.params.id })
     .populate("comment")
     .then(function(article) {
         res.json(article);

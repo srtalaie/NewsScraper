@@ -2,8 +2,8 @@
 <li>
     <div class="card teal lighten-2">
         <div class="card-content" data-id={{this._id}}>
-            <a href="{{this.link}}" style="color: rgba(245, 245, 245, 0.61);">{{this.title}}</a>
-            <div class="row center-align" style="padding-top: 5px;">
+            <a href="{{this.link}}" style="color:whitesmoke;">{{this.title}}</a>
+            <div class="row center-align" style="padding-top: 25px;">
                 <a class="waves-effect waves-light btn" id="save-button">Save</a>
                 <a class="waves-effect waves-light btn modal-trigger" href="#comment-modal">Add a Comment</a>
                 <a class="waves-effect waves-light btn modal-trigger" href="#view-comment-modal" id="view-comment" data-id={{this._id}}>View Comment</a>
@@ -16,7 +16,7 @@
             <textarea id="comment" placeholder="Your Comment"></textarea>
         </div>
         <div class="modal-footer">
-            <a href="/" class="modal-close waves-effect waves-green btn-flat" id="save-comment" data-id={{this._id}}>Save Comment</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="save-comment" data-id={{this._id}}>Save Comment</a>
         </div>
     </div>
     <div id="view-comment-modal" class="modal">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a href="/" class="modal-close waves-effect waves-green btn-flat" data-id={{this._id}}>Close</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat" data-id={{this._id}}>Close</a>
         </div>
     </div>
 </li>
