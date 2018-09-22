@@ -67,8 +67,15 @@ app.get("/scrape", function(req, res){
 //Get articles from db and populate index page
 app.get("/", function(req, res){
     db.Article.find({}, function(err, results){
+
+        let newArticlesOnly = results.reduce((unique, o) => {
+            if(!unique.some(obj => obj.title === o.title)) {
+              unique.push(o);
+            }
+            return unique;
+        },[]);
         let data = {
-            articles: results
+            articles: newArticlesOnly
         };
         res.render('index', data);
     });
