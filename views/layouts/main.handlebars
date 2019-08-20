@@ -20,16 +20,23 @@
     </style>
 </head>
 <body>
-<nav>
+      <nav>
     <div class="nav-wrapper">
-        <a href="/" class="brand-logo">NewsScraper</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <a href="/" class="brand-logo">NewsScraper</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
         <li><a href="/saved">Saved Articles</a></li>
         <li><a class="waves-effect waves-light btn" id="scrape-button" href="/scrape">Scrape New Articles</a></li>
         <li><a class="waves-effect waves-light btn" id="view-button" href="/">View Articles</a></li>
-        </ul>
+      </ul>
     </div>
-</nav>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="/saved">Saved Articles</a></li>
+    <li><a class="waves-effect waves-light btn" id="scrape-button" href="/scrape">Scrape New Articles</a></li>
+    <li><a class="waves-effect waves-light btn" id="view-button" href="/">View Articles</a></li>
+  </ul>
 <div class="row">
     <div class="col s12 valign-wrapper hero">
         <h1>Welcome to the NewsScraper</h1>
@@ -50,6 +57,10 @@
         </div>
 </div>
 <script>
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
+
     $(document).on("click", "#save-button", function(){
        let id = $(this).parent().parent().attr("data-id");
        $.ajax({
